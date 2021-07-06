@@ -1,3 +1,4 @@
+// ref: https://github.com/jimmysong/programmingbitcoin/tree/master/code-ch01
 export class FieldElement {
   private num: number;
   private prime: number;
