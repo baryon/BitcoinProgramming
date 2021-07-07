@@ -11,6 +11,10 @@ export class FieldElement {
     return new FieldElement(0, this.prime)
   }
 
+  n(n:number):FieldElement {
+    return new FieldElement(n, this.prime)
+  }
+
   toString() {
     return `FieldElement_${this.prime}(${this.num})`
   }
@@ -46,10 +50,16 @@ export class FieldElement {
     return result
   }
 
-  pow(other: FieldElement):FieldElement {
-    if(this.prime!==other.prime) throw 'prime is not equal'
+  pow(other: FieldElement|number):FieldElement {
+    let p: FieldElement
+    if(typeof other === 'number') {
+      p = new FieldElement(other as number, this.prime)
+    }else{
+      p = other as FieldElement
+    }
+    if(this.prime!==p.prime) throw 'prime is not equal'
     let result:FieldElement = this
-    for(let i=0; i<other.num-1; i++) {
+    for(let i=0; i<p.num-1; i++) {
       result = result.mul(this)
     }
     return result
